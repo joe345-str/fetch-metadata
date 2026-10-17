@@ -23,5 +23,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Set summary
+        env:
+          RELEASE_NAME: ${{ github.event.release.name }}
         run: |
-          echo ":rocket: Successfully published a new version of the immutable action package pointing at release: ${{ github.event.release.name }}" >> $GITHUB_STEP_SUMMARY
+          echo ":rocket: Successfully published a new version of the immutable action package pointing at release: $RELEASE_NAME" >> $GITHUB_STEP_SUMMARY
