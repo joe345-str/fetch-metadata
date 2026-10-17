@@ -55,5 +55,8 @@ jobs:
         run: git push -f origin refs/tags/${{ steps.extract_major.outputs.major_tag }}
 
       - name: Set summary
+        env:
+          MAJOR_TAG: ${{ steps.extract_major.outputs.major_tag }}
+          RELEASE_NAME: ${{ github.event.release.name }}
         run: |
-          echo ":rocket: Successfully moved the \`${{ steps.extract_major.outputs.major_tag }}\` tag to point at release: ${{ github.event.release.name }} with SHA: \`$GITHUB_SHA\`." >> $GITHUB_STEP_SUMMARY
+          echo ":rocket: Successfully moved the \`$MAJOR_TAG\` tag to point at release: $RELEASE_NAME with SHA: \`$GITHUB_SHA\`." >> $GITHUB_STEP_SUMMARY
